@@ -1038,14 +1038,62 @@
   // lotr, architecture (ou un nouveau, en l'ajoutant aussi
   // dans le tableau FILTERS plus bas).
   // =====================================================
-  const SETS = [
-    { name:"Rivendell", universe:"Seigneur des Anneaux", universeLabel:"Icons", ref:"10316", pieces:"6 167", tagline:"Voyagez en Terre du Milieu, pièce par pièce." },
-    { name:"Château de Poudlard", universe:"harry-potter", universeLabel:"Harry Potter", ref:"71043", pieces:"6 020", tagline:"La grande école de magie en briques." },
-    { name:"Ferrari Daytona SP3", universe:"technic", universeLabel:"Technic", ref:"42143", pieces:"3 778", tagline:"La course, sans le moteur." },
-    { name:"Faucon Millenium", universe:"star-wars", universeLabel:"Star Wars", ref:"75192", pieces:"7 541", tagline:"Le vaisseau le plus rapide de la galaxie." },
-    { name:"Maison Hantée", universe:"icons", universeLabel:"Icons", ref:"10273", pieces:"3 231", tagline:"Ressentez des frissonns... En briques." },
-    { name:"saint des Saints", universe:"Marvel", universeLabel:"Icons", ref:"76218", pieces:"2 708", tagline:"Et si vous pouviez ouvrir un portail vers le multivers en briques ?" }
-  ];
+ const SETS = [
+  {
+    name:"Rivendell",
+    universe:"lotr",
+    universeLabel:"Icons",
+    ref:"10316",
+    pieces:"6 167",
+    tagline:"Voyagez en Terre du Milieu, pièce par pièce.",
+    image:"images/rivendell.jpg"
+  },
+  {
+    name:"Château de Poudlard",
+    universe:"harry-potter",
+    universeLabel:"Harry Potter",
+    ref:"71043",
+    pieces:"6 020",
+    tagline:"La grande école de magie en briques.",
+    image:"images/poudlard.jpg"
+  },
+  {
+    name:"Ferrari Daytona SP3",
+    universe:"technic",
+    universeLabel:"Technic",
+    ref:"42143",
+    pieces:"3 778",
+    tagline:"La course, sans le moteur.",
+    image:"images/sp3.jpg"
+  },
+  {
+    name:"Faucon Millenium",
+    universe:"star-wars",
+    universeLabel:"Star Wars",
+    ref:"75192",
+    pieces:"7 541",
+    tagline:"Le vaisseau le plus rapide de la galaxie.",
+    image:"images/faucon.jpg"
+  },
+  {
+    name:"Maison Hantée",
+    universe:"icons",
+    universeLabel:"Icons",
+    ref:"10273",
+    pieces:"3 231",
+    tagline:"Ressentez des frissons… en briques.",
+    image:"images/maison-hantee.jpg"
+  },
+  {
+    name:"Saint des Saints",
+    universe:"marvel",
+    universeLabel:"Marvel",
+    ref:"76218",
+    pieces:"2 708",
+    tagline:"Ouvrez un portail vers le multivers.",
+    image:"images/saint-des-saints.jpg"
+  }
+];
 
   const FILTERS = [
     { key:"all", label:"Tous" },
@@ -1076,7 +1124,7 @@
     const list = filter === 'all' ? SETS : SETS.filter(s=>s.universe===filter);
     grid.innerHTML = list.map(s=>`
       <div class="set-card" data-universe="${s.universe}">
-        <div class="set-poster">
+        <div class="set-poster" style="background-image:url('${s.image}'); background-size:cover; background-position:center;">
           <span class="sp-eyebrow">${s.universeLabel}</span>
           <div>
             <div class="sp-title">${s.name}</div>
