@@ -553,61 +553,107 @@
   .set-card{
     background:var(--cream);
     border-radius:12px;
-    overflow:hidden;
+    overflow:visible;
     border:1px solid rgba(26,29,41,0.07);
     transition:transform .3s var(--ease), box-shadow .3s var(--ease);
   }
   .set-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(26,29,41,0.12);}
-  .set-poster{
+
+  .set-flip{
     position:relative;
     aspect-ratio:4/3;
-    padding:22px;
+    perspective:1200px;
+    cursor:pointer;
+    border-radius:12px 12px 0 0;
+    overflow:hidden;
+  }
+  .set-flip__inner{
+    position:relative;
+    width:100%;height:100%;
+    transition:transform .6s var(--ease);
+    transform-style:preserve-3d;
+  }
+  .set-flip.is-flipped .set-flip__inner{transform:rotateY(180deg);}
+  .set-flip__face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-end;
+    padding:18px 20px;
     color:#F7F2E7;
   }
-  .set-poster::before,.set-poster::after{
-    content:'';
-    position:absolute;
-    top:50%;
-    width:18px;height:18px;
-    border-radius:50%;
-    background:var(--cream);
-    transform:translateY(-50%);
+  .set-flip__face--front{
+    background:#1c1c1c;
+    background-size:cover;
+    background-position:center;
   }
-  .set-poster::before{left:-9px;}
-  .set-poster::after{right:-9px;}
-  .set-poster .sp-eyebrow{
+  .set-flip__face--front::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(10,10,12,0.78), rgba(10,10,12,0) 55%);
+  }
+  .set-flip__name{
+    position:relative;
+    z-index:1;
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    font-size:21px;
+    line-height:1.15;
+  }
+  .set-flip__hint{
+    position:absolute;
+    top:14px;right:14px;
+    width:30px;height:30px;
+    border-radius:50%;
+    background:rgba(10,10,12,0.45);
+    backdrop-filter:blur(3px);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    z-index:1;
+  }
+  .set-flip__face--back{
+    transform:rotateY(180deg);
+    justify-content:center;
+    gap:14px;
+  }
+  .set-flip__face--back .sp-eyebrow{
     font-family:'Space Mono',monospace;
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
-    opacity:.75;
-  }
-  .set-poster .sp-title{
-    font-family:'Bricolage Grotesque',sans-serif;
-    font-weight:700;
-    font-size:24px;
-    line-height:1.1;
-  }
-  .set-poster .sp-tagline{
-    font-size:13px;
     opacity:.8;
-    margin-top:6px;
-    font-style:italic;
+  }
+  .set-flip__specs{
+    list-style:none;
+    margin:0;padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:14px;
+  }
+  .set-flip__specs strong{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    color:var(--gold-light);
+    margin-right:5px;
   }
 
-  [data-universe="star-wars"] .set-poster{background:linear-gradient(165deg,#0c0e16,#1c2030);}
-  [data-universe="harry-potter"] .set-poster{background:linear-gradient(165deg,#2b1117,#4a1c20);}
-  [data-universe="technic"] .set-poster{background:linear-gradient(165deg,#1c1c1c,#3a3a3a);}
-  [data-universe="icons"] .set-poster{background:linear-gradient(165deg,#241a0c,#4a371a);}
-  [data-universe="Seigneur-des-anneaux"] .set-poster{background:linear-gradient(165deg,#101a14,#1f3325);}
-  [data-universe="Marvel"] .set-poster{background:linear-gradient(165deg,#11151c,#27313f);}
+  [data-universe="Star-wars"] .set-flip__face--back{background:linear-gradient(165deg,#0c0e16,#1c2030);}
+  [data-universe="harry-potter"] .set-flip__face--back{background:linear-gradient(165deg,#2b1117,#4a1c20);}
+  [data-universe="technic"] .set-flip__face--back{background:linear-gradient(165deg,#1c1c1c,#3a3a3a);}
+  [data-universe="icons"] .set-flip__face--back{background:linear-gradient(165deg,#241a0c,#4a371a);}
+  [data-universe="Seigneur-des-Anneaux"] .set-flip__face--back{background:linear-gradient(165deg,#101a14,#1f3325);}
+  [data-universe="Marvel"] .set-flip__face--back{background:linear-gradient(165deg,#11151c,#27313f);}
+
+  @media (prefers-reduced-motion:reduce){
+    .set-flip__inner{transition:none;}
+  }
 
   .set-meta{
     padding:18px 22px 22px;
     border-top:1px dashed rgba(26,29,41,0.15);
+    border-radius:0 0 12px 12px;
   }
   .set-meta-row{
     display:flex;
@@ -1049,8 +1095,11 @@
     universeLabel:"Seigneur des Anneaux",
     ref:"10316",
     pieces:"6 167",
+    age:"18 ans",
+    priceFrom:"XX €", // ⚠️ à compléter avec ton tarif réel
     tagline:"Voyagez en Terre du Milieu, pièce par pièce.",
-    image:"images/rivendell.jpg"
+    image:"images/rivendell.jpg",
+    rentUrl:"https://locabriques.fr/sets/le-seigneur-des-anneaux-fondcombe-10316-1"
   },
   {
     name:"Château de Poudlard",
@@ -1058,8 +1107,11 @@
     universeLabel:"Harry Potter",
     ref:"71043",
     pieces:"6 020",
+    age:"16 ans",
+    priceFrom:"79 €",
     tagline:"La grande école de magie en briques.",
-    image:"images/poudlard.jpg"
+    image:"images/poudlard.jpg",
+    rentUrl:"https://locabriques.fr/sets/le-chateau-de-poudlard-1-71043-1"
   },
   {
     name:"Ferrari Daytona SP3",
@@ -1067,8 +1119,11 @@
     universeLabel:"Technic",
     ref:"42143",
     pieces:"3 778",
+    age:"18 ans",
+    priceFrom:"XX €", // ⚠️ à compléter avec ton tarif réel
     tagline:"La course, sans le moteur.",
-    image:"images/sp3.jpg"
+    image:"images/sp3.jpg",
+    rentUrl:"https://locabriques.fr/sets/ferrari-daytona-sp3-42143-1"
   },
   {
     name:"Faucon Millenium",
@@ -1076,8 +1131,11 @@
     universeLabel:"Star Wars",
     ref:"75192",
     pieces:"7 541",
+    age:"16 ans",
+    priceFrom:"XX €", // ⚠️ à compléter avec ton tarif réel
     tagline:"Le vaisseau le plus rapide de la galaxie.",
-    image:"images/faucon.jpg"
+    image:"images/faucon.jpg",
+    rentUrl:"https://locabriques.fr/sets/millennium-falcon-1-75192-1"
   },
   {
     name:"Maison Hantée",
@@ -1085,8 +1143,11 @@
     universeLabel:"Icons",
     ref:"10273",
     pieces:"3 231",
+    age:"18 ans",
+    priceFrom:"XX €", // ⚠️ à compléter avec ton tarif réel
     tagline:"Ressentez des frissons… en briques.",
-    image:"images/maison-hantee.jpg"
+    image:"images/maison-hantee.jpg",
+    rentUrl:"https://locabriques.fr/sets/la-maison-hantee-de-la-fete-foraine-10273-1"
   },
   {
     name:"Saint des Saints",
@@ -1094,8 +1155,11 @@
     universeLabel:"Marvel",
     ref:"76218",
     pieces:"2 708",
+    age:"18 ans",
+    priceFrom:"XX €", // ⚠️ à compléter avec ton tarif réel
     tagline:"Ouvrez un portail vers le multivers.",
-    image:"images/saint-des-saints.jpg"
+    image:"images/saint-des-saints.jpg",
+    rentUrl:"https://locabriques.fr/sets/le-saint-des-saints-76218-1"
   }
 ];
 
@@ -1109,6 +1173,7 @@
     { key:"icons", label:"Icons" }
   ];
 
+  // URL de repli si un set n'a pas (encore) de rentUrl spécifique
   const RENT_URL = "https://locabriques.fr/shops/brickflix";
 
   function renderFilters(){
@@ -1130,19 +1195,27 @@
     const list = filter === 'all' ? SETS : SETS.filter(s=>s.universe===filter);
     grid.innerHTML = list.map(s=>`
       <div class="set-card" data-universe="${s.universe}">
-        <div class="set-poster" style="background-image:url('${s.image}'); background-size:cover; background-position:center;">
-          <span class="sp-eyebrow">${s.universeLabel}</span>
-          <div>
-            <div class="sp-title">${s.name}</div>
-            <div class="sp-tagline">${s.tagline}</div>
+        <div class="set-flip" role="button" tabindex="0" aria-label="Voir les caractéristiques de ${s.name}">
+          <div class="set-flip__inner">
+            <div class="set-flip__face set-flip__face--front" style="background-image:url('${s.image}');">
+              <span class="set-flip__hint">↻</span>
+              <span class="set-flip__name">${s.name}</span>
+            </div>
+            <div class="set-flip__face set-flip__face--back">
+              <span class="sp-eyebrow">${s.universeLabel}</span>
+              <ul class="set-flip__specs">
+                <li><strong>${s.pieces}</strong> pièces</li>
+                <li><strong>${s.age}</strong> et +</li>
+                <li>à partir de <strong>${s.priceFrom}</strong> / mois</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="set-meta">
           <div class="set-meta-row">
             <span>RÉF. ${s.ref}</span>
-            <span>${s.pieces} PCS</span>
           </div>
-          <a class="btn btn--dark btn--block" href="${RENT_URL}" target="_blank" rel="noopener">Louer ce set</a>
+          <a class="btn btn--dark btn--block" href="${s.rentUrl || RENT_URL}" target="_blank" rel="noopener">Louer ce set</a>
         </div>
       </div>
     `).join('');
@@ -1150,6 +1223,19 @@
 
   renderFilters();
   renderSets('all');
+
+  // Retournement recto/verso des vignettes (clic ou clavier), délégué une fois
+  // sur le conteneur puisque les cartes sont régénérées à chaque filtre.
+  const setsGridEl = document.getElementById('setsGrid');
+  setsGridEl.addEventListener('click', e=>{
+    const flip = e.target.closest('.set-flip');
+    if(flip) flip.classList.toggle('is-flipped');
+  });
+  setsGridEl.addEventListener('keydown', e=>{
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    const flip = e.target.closest('.set-flip');
+    if(flip){ e.preventDefault(); flip.classList.toggle('is-flipped'); }
+  });
 
   // Header scroll state
   const header = document.getElementById('header');
