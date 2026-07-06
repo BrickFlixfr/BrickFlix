@@ -32,7 +32,7 @@
   body{
     margin:0;
     overflow-x:hidden;
-    background:var(--paper) url('images/fond.png') center top / 100% auto no-repeat;
+    background:var(--paper);
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
     font-size:16px;
@@ -158,14 +158,7 @@
     font-size:21px;
     color:var(--cream);
     display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .brand__logo{
-    height:30px;
-    width:auto;
-    display:block;
-    object-fit:contain;
+    align-items:baseline;
   }
   .brand__flix{color:var(--gold);position:relative;}
   .brand__dot{
@@ -320,22 +313,9 @@
   .mp-3{background:linear-gradient(160deg,#1c1c1c,#3a3a3a);color:#F0EFEC;transform:rotate(4deg) translate(40px,18px) translateY(var(--py,0px));z-index:2;}
   .mp-4{background:linear-gradient(160deg,#10131e,#1d2236);color:#F7F2E7;transform:rotate(10deg) translate(96px,-12px) translateY(var(--py,0px));z-index:1;}
 
-  .hero__perso{
-    position:absolute;
-    bottom:0;
-    pointer-events:none;
-    filter:drop-shadow(0 10px 28px rgba(10,12,22,0.45));
-    z-index:4;
-  }
-  .hero__perso--right{
-    right:-30px;
-    height:320px;
-    width:auto;
-  }
   @media (max-width:980px){
     .hero__inner{grid-template-columns:1fr;text-align:left;}
     .hero{padding-top:124px;}
-    .hero__perso--right{height:160px;right:-10px;}
     .hero__posters{
       display:flex;
       position:static;
@@ -433,133 +413,96 @@
     transform:translateY(var(--py-bg,0px));
     will-change:transform;
   }
-  .how__inner{
-    position:relative;
-    display:grid;
-    grid-template-columns:200px 1fr;
-    gap:40px;
-    align-items:start;
-  }
+  .how__inner{position:relative;overflow:hidden;}
   .how__perso{
-    width:100%;
-    max-width:200px;
-    object-fit:contain;
-    align-self:end;
-    filter:drop-shadow(0 8px 24px rgba(10,12,22,0.5));
-    margin-top:auto;
-  }
-  .how__inner .heading-row,
-  .how__inner .steps,
-  .how__inner .how__closing{
-    grid-column:2;
-  }
-  @media(max-width:860px){
-    .how__inner{grid-template-columns:1fr;}
-    .how__perso{
-      max-width:120px;
-      position:absolute;
-      right:0;bottom:0;
-      opacity:0.35;
-    }
-  }
-  .steps{
-    position:relative;
-    max-width:680px;
-    margin:0 auto;
-  }
-  .steps::before{
-    content:'';
     position:absolute;
-    left:25px;top:14px;bottom:14px;
-    width:1px;
-    background-image:linear-gradient(to bottom, rgba(232,163,61,0.55) 0 8px, transparent 8px 16px);
-    background-size:1px 16px;
+    right:-24px;bottom:0;
+    height:260px;width:auto;max-width:none;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 24px rgba(10,12,22,0.5));
+    opacity:0.2;
+    pointer-events:none;
+    z-index:0;
   }
-  .step{
-    position:relative;
+  @media(max-width:860px){.how__perso{display:none;}}
+
+  /* Grille de cartes — même logique que .concept-grid */
+  .how-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+    position:relative;z-index:1;
+  }
+  .how-card{
+    background:rgba(247,242,231,0.055);
+    border:1px solid rgba(247,242,231,0.10);
+    border-radius:10px;
+    padding:22px 18px;
     display:flex;
-    gap:24px;
-    padding-bottom:44px;
+    flex-direction:column;
   }
-  .step:last-child{padding-bottom:0;}
-  .step__badge{
-    flex-shrink:0;
-    width:50px;height:50px;
+  .how-card__num{
+    font-family:'Space Mono',monospace;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.12em;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .how-card__icon{
+    width:42px;height:42px;
     border-radius:50%;
-    background:var(--navy-deep);
-    border:1.5px solid var(--gold);
+    background:rgba(232,163,61,0.12);
+    border:1.5px solid rgba(232,163,61,0.3);
     color:var(--gold-light);
     display:flex;align-items:center;justify-content:center;
-    font-family:'Space Mono',monospace;
-    font-size:13px;
-    position:relative;
-    z-index:1;
+    margin-bottom:16px;
   }
-  .step__badge svg{width:20px;height:20px;}
-  .step__num{
-    position:absolute;
-    top:-8px;right:-8px;
-    width:20px;height:20px;
-    border-radius:50%;
-    background:var(--gold);
-    color:var(--ink);
-    font-size:10.5px;
-    font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .step h3{font-size:18.5px;margin-bottom:6px;color:var(--cream);}
-  .step p{font-size:14.5px;color:var(--cream-soft);max-width:420px;}
+  .how-card__icon svg{width:20px;height:20px;}
+  .how-card h3{font-size:15.5px;line-height:1.2;margin-bottom:10px;color:var(--cream);}
+  .how-card p{font-size:13.5px;color:var(--cream-soft);line-height:1.55;}
 
-  @media (max-width:980px){
-    .steps::before{display:none;}
-    .steps{
+  @media(max-width:980px){
+    .how-grid{
       display:flex;
-      max-width:none;
-      margin:0 -24px;
+      grid-template-columns:none;
       overflow-x:auto;
       overscroll-behavior-x:contain;
       -webkit-overflow-scrolling:touch;
       scroll-snap-type:x mandatory;
       gap:16px;
+      margin:0 -24px;
       padding:4px 24px 10px;
     }
-    .steps::-webkit-scrollbar{display:none;}
-    .step{
+    .how-grid::-webkit-scrollbar{display:none;}
+    .how-card{
       flex:0 0 78%;
       max-width:300px;
-      flex-direction:column;
-      align-items:flex-start;
-      gap:16px;
-      padding:24px 22px 26px;
-      background:rgba(247,242,231,0.045);
-      border:1px solid rgba(247,242,231,0.1);
-      border-radius:16px;
       scroll-snap-align:start;
     }
-    .step:last-child{padding-bottom:26px;}
-    .step p{max-width:none;}
   }
-  @media (max-width:480px){
-    .step{flex:0 0 84%;}
-  }
+  @media(max-width:480px){.how-card{flex:0 0 84%;}}
 
   .how__closing{
     text-align:center;
-    margin-top:56px;
+    margin-top:48px;
     font-family:'Bricolage Grotesque',sans-serif;
     font-size:clamp(19px,2.4vw,26px);
     font-weight:700;
     color:var(--gold-light);
     letter-spacing:.01em;
+    position:relative;z-index:1;
   }
   .how__closing .stud{margin:0 12px;color:rgba(247,242,231,0.3);}
-
-  @media (max-width:480px){
+  @media(max-width:480px){
     .how__closing{font-size:18px;}
     .how__closing .stud{margin:0 7px;}
   }
 
   /* ============ SETS GALLERY ============ */
+  #sets{
+    background:var(--paper) url('images/fond.png') center top / 100% auto no-repeat;
+  }
   .filters{
     display:flex;
     gap:10px;
@@ -865,7 +808,7 @@
 
 <header class="header" id="header">
   <div class="container header__inner">
-    <a href="#hero" class="brand"><img src="images/logo.png" alt="BrickFlix logo" class="brand__logo">Brick<span class="brand__flix">Flix<i class="brand__dot"></i></span></a>
+    <a href="#hero" class="brand">Brick<span class="brand__flix">Flix<i class="brand__dot"></i></span></a>
     <nav class="nav" id="nav">
       <a href="#sets">Les sets</a>
       <a href="#comment">Comment ça marche</a>
@@ -894,7 +837,6 @@
         </div>
       </div>
       <div class="hero__posters">
-        <img src="images/perso-2.png" alt="Co-fondateur BrickFlix" class="hero__perso hero__perso--right">
         <div class="mini-poster mp-1">
           <span class="mp-eyebrow">Seigneur des Anneaux</span>
           <span class="mp-title">Rivendell</span>
@@ -961,7 +903,6 @@
   <section class="how" id="comment">
     <div class="how__grid-bg"></div>
     <div class="container how__inner">
-      <img src="images/perso-1.png" alt="Co-fondateur BrickFlix" class="how__perso" loading="lazy">
       <div class="heading-row reveal" style="border:none;">
         <div>
           <p class="eyebrow eyebrow--dark">Le processus</p>
@@ -969,56 +910,46 @@
         </div>
       </div>
 
-      <div class="steps">
-        <div class="step reveal">
-          <div class="step__badge">
-            <span class="step__num">1</span>
+      <div class="how-grid">
+        <div class="how-card reveal">
+          <span class="how-card__num">ÉTAPE 01</span>
+          <div class="how-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 12 4l8.5 4.5L12 13Z"/><path d="M3.5 8.5V16L12 20.5 20.5 16V8.5"/></svg>
           </div>
-          <div>
-            <h3>Préparation &amp; expédition</h3>
-            <p>Nous préparons soigneusement le set avant son départ.</p>
-          </div>
+          <h3>Préparation &amp; expédition</h3>
+          <p>Nous préparons soigneusement le set avant son départ.</p>
         </div>
-        <div class="step reveal">
-          <div class="step__badge">
-            <span class="step__num">2</span>
+        <div class="how-card reveal">
+          <span class="how-card__num">ÉTAPE 02</span>
+          <div class="how-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
           </div>
-          <div>
-            <h3>Construisez et profitez</h3>
-            <p>Vivez l'expérience LEGO® telle qu'elle a été imaginée.</p>
-          </div>
+          <h3>Construisez et profitez</h3>
+          <p>Vivez l'expérience LEGO® telle qu'elle a été imaginée.</p>
         </div>
-        <div class="step reveal">
-          <div class="step__badge">
-            <span class="step__num">3</span>
+        <div class="how-card reveal">
+          <span class="how-card__num">ÉTAPE 03</span>
+          <div class="how-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7" width="17" height="13" rx="1.2"/><path d="M3.5 7 12 13l8.5-6"/></svg>
           </div>
-          <div>
-            <h3>Retour du set</h3>
-            <p>Lorsque votre construction est terminée, renvoyez simplement le set.</p>
-          </div>
+          <h3>Retour du set</h3>
+          <p>Lorsque votre construction est terminée, renvoyez simplement le set.</p>
         </div>
-        <div class="step reveal">
-          <div class="step__badge">
-            <span class="step__num">4</span>
+        <div class="how-card reveal">
+          <span class="how-card__num">ÉTAPE 04</span>
+          <div class="how-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.2 15.2 20 20"/></svg>
           </div>
-          <div>
-            <h3>Contrôle et reconditionnement</h3>
-            <p>Nous vérifions les pièces et reconstituons les sachets.</p>
-          </div>
+          <h3>Contrôle et reconditionnement</h3>
+          <p>Nous vérifions les pièces et reconstituons les sachets.</p>
         </div>
-        <div class="step reveal">
-          <div class="step__badge">
-            <span class="step__num">5</span>
+        <div class="how-card reveal">
+          <span class="how-card__num">ÉTAPE 05</span>
+          <div class="how-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h11.5a3.5 3.5 0 1 1 0 7H4"/><path d="M7 5 4 8l3 3"/><path d="M20 16H8.5a3.5 3.5 0 1 1 0-7H20"/><path d="M17 19l3-3-3-3"/></svg>
           </div>
-          <div>
-            <h3>Prêt pour un nouveau passionné</h3>
-            <p>Le set est prêt à repartir pour une nouvelle aventure.</p>
-          </div>
+          <h3>Prêt pour un nouveau passionné</h3>
+          <p>Le set est prêt à repartir pour une nouvelle aventure.</p>
         </div>
       </div>
 
