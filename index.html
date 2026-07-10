@@ -3,8 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BrickFlix — Louez les plus grands sets LEGO®</title>
-<meta name="description" content="BrickFlix vous permet de louer des sets LEGO® d'exception, de les construire chez vous, puis de les retourner une fois l'aventure terminée.">
+
+<!-- ===== SEO ===== -->
+<title>Location de LEGO® en Bourgogne-Franche-Comté | BrickFlix</title>
+<meta name="description" content="BrickFlix : louez des sets LEGO® premium en Bourgogne-Franche-Comté. Château de Poudlard, Faucon Millenium, Rivendell… Construisez, profitez, renvoyez. À partir de 49 €/mois.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://brickflix.fr/">
+
+<!-- Open Graph (partage réseaux sociaux) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brickflix.fr/">
+<meta property="og:title" content="Location de LEGO® premium | BrickFlix">
+<meta property="og:description" content="Louez des sets LEGO® d'exception en Bourgogne-Franche-Comté. Construisez les plus grands sets sans les acheter.">
+<meta property="og:image" content="https://brickflix.fr/images/og-image.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Données structurées JSON-LD (enrichit les résultats Google) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "name": "BrickFlix",
+      "description": "Location de sets LEGO® premium en Bourgogne-Franche-Comté. Louez, construisez et renvoyez les plus grands sets LEGO® sans les acheter.",
+      "url": "https://brickflix.fr",
+      "logo": "https://brickflix.fr/images/logo.png",
+      "image": "https://brickflix.fr/images/og-image.jpg",
+      "areaServed": {
+        "@type": "State",
+        "name": "Bourgogne-Franche-Comté",
+        "addressCountry": "FR"
+      },
+      "priceRange": "€€",
+      "sameAs": ["https://www.instagram.com/brick_flix_/"]
+    },
+    {
+      "@type": "Service",
+      "name": "Location de sets LEGO®",
+      "provider": { "@type": "LocalBusiness", "name": "BrickFlix" },
+      "description": "Location de sets LEGO® premium : Château de Poudlard, Faucon Millenium, Rivendell, Ferrari Daytona SP3. Livraison et retour inclus.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "lowPrice": "49",
+        "offerCount": "6"
+      },
+      "areaServed": "France"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Les sets LEGO® sont-ils complets ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui, chaque set est contrôlé avant expédition." }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de temps puis-je garder un set LEGO® ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "La durée de location est de minimum 1 mois, selon l'offre choisie." }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment réserver un set LEGO® chez BrickFlix ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Cliquez sur « Louer ce set » pour accéder à notre plateforme partenaire Locabriques." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -430,7 +501,7 @@
   .how-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:16px;
+    gap:20px;
     position:relative;z-index:1;
   }
   .how-card{
@@ -441,6 +512,7 @@
     display:flex;
     flex-direction:column;
   }
+
   .how-card__num{
     font-family:'Space Mono',monospace;
     font-size:11px;
@@ -979,8 +1051,9 @@
         <p class="eyebrow">Qui sommes-nous</p>
         <h2 style="margin-bottom:24px;">Deux passionnés, une idée simple.</h2>
         <p class="about__lead">Nous sommes deux passionnés de LEGO® convaincus que les plus beaux sets méritent d'être construits par le plus grand nombre.</p>
-        <p>BrickFlix est né d'une question simple : <strong>pourquoi acheter un set à plusieurs centaines d'euros pour ne le construire qu'une seule fois ?</strong> Nous avons donc décidé de proposer une alternative plus économique, plus écologique et sans encombrement.</p>
-        <p>Notre mission est de permettre à chacun de vivre l'expérience des plus grands sets LEGO®, sans les contraintes liées à l'achat.</p>
+        <p>Basés en <strong>Bourgogne-Franche-Comté</strong>, nous proposons la <strong>location de sets LEGO® premium</strong> partout en France. BrickFlix est né d'une question simple : <strong>pourquoi acheter un set à plusieurs centaines d'euros pour ne le construire qu'une seule fois ?</strong></p>
+        <p>Nous avons donc décidé de proposer une alternative plus économique, plus écologique et sans encombrement : louer le set, le construire chez soi, l'exposer le temps qu'on le souhaite, puis le renvoyer pour qu'il parte vivre une nouvelle aventure.</p>
+        <p>Notre mission est de permettre à chacun — où qu'il soit en France — de vivre l'expérience des plus grands sets LEGO®, sans les contraintes liées à l'achat.</p>
       </div>
 
       <div class="trust-card reveal">
