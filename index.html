@@ -627,6 +627,7 @@
     aspect-ratio:4/3;
     perspective:1200px;
     cursor:pointer;
+    touch-action:manipulation;
     border-radius:12px 12px 0 0;
     overflow:hidden;
   }
@@ -887,10 +888,17 @@
     transform-origin:bottom right;
     transform:scale(0);
     opacity:0;
-    transition:transform .4s cubic-bezier(.2,.9,.3,1.2), opacity .3s var(--ease);
+    visibility:hidden;
+    transition:transform .4s cubic-bezier(.2,.9,.3,1.2), opacity .3s var(--ease), visibility 0s .4s;
     pointer-events:none;
   }
-  .promo-popup.is-open{transform:scale(1);opacity:1;pointer-events:auto;}
+  .promo-popup.is-open{
+    transform:scale(1);
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:transform .4s cubic-bezier(.2,.9,.3,1.2), opacity .3s var(--ease), visibility 0s 0s;
+  }
   .promo-popup__header{
     background:linear-gradient(135deg,var(--gold),var(--gold-light));
     padding:16px 20px;
@@ -1236,7 +1244,7 @@
 
 <!-- ============ BULLE PROMO ============ -->
 <div class="promo-bubble" id="promoBubble">
-  <div class="promo-popup" id="promoPopup" role="dialog" aria-label="Offre promotionnelle BrickFlix">
+  <div class="promo-popup" id="promoPopup" aria-hidden="true">
     <div class="promo-popup__header">
       <span class="promo-popup__tag">🎁 Offre exclusive</span>
       <button class="promo-popup__close" id="promoClose" aria-label="Fermer">✕</button>
@@ -1257,6 +1265,11 @@
 </div>
 
 <script>
+  // Forcer le scroll en haut de page au chargement (évite l'atterrissage
+  // en milieu de page sur mobile, notamment causé par la restauration de
+  // position du navigateur ou par des éléments focusables)
+  if(history.scrollRestoration) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
   // =====================================================
   // CATALOGUE DE SETS — pour ajouter un set, dupliquez un
   // objet ci-dessous et modifiez ses valeurs. Univers
@@ -1460,13 +1473,14 @@
   const promoCopy   = document.getElementById('promoCopy');
 
   promoBtn.addEventListener('click', () => {
-    promoPopup.classList.toggle('is-open');
-    // Masquer le point rouge dès le premier clic
+    const isOpen = promoPopup.classList.toggle('is-open');
+    promoPopup.setAttribute('aria-hidden', !isOpen);
     promoBtn.querySelector('.promo-btn__ping').style.display = 'none';
   });
   promoClose.addEventListener('click', (e) => {
     e.stopPropagation();
     promoPopup.classList.remove('is-open');
+    promoPopup.setAttribute('aria-hidden', 'true');
   });
   promoCopy.addEventListener('click', () => {
     navigator.clipboard.writeText('BrickFlix2').then(() => {
