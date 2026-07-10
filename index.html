@@ -866,6 +866,106 @@
     .footer__bottom{flex-direction:column;gap:10px;}
   }
 
+  /* ============ BULLE PROMO ============ */
+  .promo-bubble{
+    position:fixed;
+    bottom:28px;right:28px;
+    z-index:200;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:12px;
+  }
+  .promo-popup{
+    background:var(--navy-deep);
+    color:var(--cream);
+    border-radius:20px;
+    max-width:300px;width:300px;
+    box-shadow:0 20px 48px rgba(10,12,22,0.45);
+    border:1px solid rgba(232,163,61,0.3);
+    overflow:hidden;
+    transform-origin:bottom right;
+    transform:scale(0);
+    opacity:0;
+    transition:transform .4s cubic-bezier(.2,.9,.3,1.2), opacity .3s var(--ease);
+    pointer-events:none;
+  }
+  .promo-popup.is-open{transform:scale(1);opacity:1;pointer-events:auto;}
+  .promo-popup__header{
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    padding:16px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .promo-popup__tag{
+    font-family:'Space Mono',monospace;
+    font-size:10.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink);
+  }
+  .promo-popup__close{
+    width:22px;height:22px;border-radius:50%;
+    background:rgba(26,29,41,0.18);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:13px;color:var(--ink);
+    transition:background .2s;border:none;
+  }
+  .promo-popup__close:hover{background:rgba(26,29,41,0.32);}
+  .promo-popup__body{padding:20px 22px 22px;}
+  .promo-popup__title{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:20px;font-weight:700;line-height:1.2;
+    margin-bottom:10px;color:var(--cream);
+  }
+  .promo-popup__title span{color:var(--gold-light);}
+  .promo-popup__sub{font-size:13.5px;color:var(--cream-soft);margin-bottom:18px;line-height:1.5;}
+  .promo-popup__code{
+    display:flex;align-items:center;gap:10px;
+    background:rgba(247,242,231,0.07);
+    border:1.5px dashed rgba(232,163,61,0.5);
+    border-radius:10px;padding:12px 16px;
+  }
+  .promo-popup__code-label{
+    font-family:'Space Mono',monospace;
+    font-size:16px;font-weight:700;
+    color:var(--gold-light);letter-spacing:.06em;flex:1;
+  }
+  .promo-popup__copy{
+    font-size:12px;font-weight:600;
+    color:var(--ink);background:var(--gold);
+    border:none;border-radius:6px;
+    padding:6px 12px;cursor:pointer;
+    transition:background .2s, color .2s;flex-shrink:0;
+  }
+  .promo-popup__copy:hover{background:var(--gold-light);}
+  .promo-popup__copy.copied{background:#4caf7d;color:#fff;}
+  .promo-btn{
+    width:58px;height:58px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(232,163,61,0.5);
+    cursor:pointer;border:none;font-size:26px;
+    position:relative;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+    flex-shrink:0;
+  }
+  .promo-btn:hover{transform:scale(1.1);box-shadow:0 12px 32px rgba(232,163,61,0.6);}
+  .promo-btn__ping{
+    position:absolute;top:-3px;right:-3px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--brick);border:2px solid white;
+    animation:ping 2s ease-in-out infinite;
+  }
+  @keyframes ping{
+    0%,100%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.5);opacity:.6;}
+  }
+  @media(max-width:560px){
+    .promo-bubble{bottom:18px;right:14px;}
+    .promo-popup{width:calc(100vw - 28px);max-width:none;}
+    .promo-btn{width:50px;height:50px;font-size:22px;}
+  }
+
   /* ============ REVEAL ANIM ============ */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease);}
   .reveal.is-visible{opacity:1;transform:none;}
@@ -1051,7 +1151,7 @@
         <p class="eyebrow">Qui sommes-nous</p>
         <h2 style="margin-bottom:24px;">Deux passionnés, une idée simple.</h2>
         <p class="about__lead">Nous sommes deux passionnés de LEGO® convaincus que les plus beaux sets méritent d'être construits par le plus grand nombre.</p>
-        <p>Basés en <strong>Bourgogne-Franche-Comté</strong>, nous proposons la <strong>location de sets LEGO® premium</strong> partout en France. BrickFlix est né d'une question simple : <strong>pourquoi acheter un set à plusieurs centaines d'euros pour ne le construire qu'une seule fois ?</strong></p>
+        <p>Basés à <strong>Dijon, en Bourgogne-Franche-Comté</strong>, nous proposons la <strong>location de sets LEGO® premium</strong> partout en France. BrickFlix est né d'une question simple : <strong>pourquoi acheter un set à plusieurs centaines d'euros pour ne le construire qu'une seule fois ?</strong></p>
         <p>Nous avons donc décidé de proposer une alternative plus économique, plus écologique et sans encombrement : louer le set, le construire chez soi, l'exposer le temps qu'on le souhaite, puis le renvoyer pour qu'il parte vivre une nouvelle aventure.</p>
         <p>Notre mission est de permettre à chacun — où qu'il soit en France — de vivre l'expérience des plus grands sets LEGO®, sans les contraintes liées à l'achat.</p>
       </div>
@@ -1331,19 +1431,40 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // =====================================================
-  // PARALLAX — léger effet de profondeur sur le hero et la
-  // section "Comment ça marche" (fonds en grille + posters
-  // flottants). Désactivé sur mobile/tablette (<860px) et
-  // si l'utilisateur préfère un mouvement réduit, pour ne
-  // pas nuire au confort et à la fluidité du défilement.
-  // =====================================================
+  // ── Bulle promo ──────────────────────────────────────────────────────────
+  const promoBtn    = document.getElementById('promoBtn');
+  const promoPopup  = document.getElementById('promoPopup');
+  const promoClose  = document.getElementById('promoClose');
+  const promoCopy   = document.getElementById('promoCopy');
+
+  promoBtn.addEventListener('click', () => {
+    promoPopup.classList.toggle('is-open');
+    // Masquer le point rouge dès le premier clic
+    promoBtn.querySelector('.promo-btn__ping').style.display = 'none';
+  });
+  promoClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    promoPopup.classList.remove('is-open');
+  });
+  promoCopy.addEventListener('click', () => {
+    navigator.clipboard.writeText('BrickFlix2').then(() => {
+      promoCopy.textContent = 'Copié !';
+      promoCopy.classList.add('copied');
+      setTimeout(() => {
+        promoCopy.textContent = 'Copier';
+        promoCopy.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      // fallback si clipboard non dispo
+      promoCopy.textContent = 'BrickFlix2';
+    });
+  });
+
+  // ── Parallax ─────────────────────────────────────────────────────────────
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isWideEnough = () => window.innerWidth >= 860;
-
   const heroSection = document.getElementById('hero');
-  const howSection = document.getElementById('comment');
-
+  const howSection  = document.getElementById('comment');
   const parallaxTargets = [
     { el: document.querySelector('.hero__grid'), prop: '--py-bg', factor: 0.18, section: heroSection },
     { el: document.querySelector('.how__grid-bg'), prop: '--py-bg', factor: 0.16, section: howSection },
@@ -1352,44 +1473,45 @@
     { el: document.querySelector('.mp-3'), prop: '--py', factor: 0.08, section: heroSection },
     { el: document.querySelector('.mp-4'), prop: '--py', factor: -0.12, section: heroSection },
   ].filter(t => t.el && t.section);
-
   let parallaxActive = !prefersReducedMotion && isWideEnough();
   let ticking = false;
-
   function updateParallax(){
     parallaxTargets.forEach(t=>{
       const rect = t.section.getBoundingClientRect();
-      const offset = rect.top * t.factor;
-      t.el.style.setProperty(t.prop, offset.toFixed(1) + 'px');
+      t.el.style.setProperty(t.prop, (rect.top * t.factor).toFixed(1) + 'px');
     });
     ticking = false;
   }
-
-  function onScroll(){
-    if(!parallaxActive) return;
-    if(!ticking){
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }
-
-  if(parallaxActive && parallaxTargets.length){
-    window.addEventListener('scroll', onScroll, { passive:true });
-    updateParallax();
-  }
-
+  function onScroll(){ if(!parallaxActive) return; if(!ticking){ requestAnimationFrame(updateParallax); ticking=true; } }
+  if(parallaxActive && parallaxTargets.length){ window.addEventListener('scroll', onScroll, {passive:true}); updateParallax(); }
   window.addEventListener('resize', ()=>{
-    const shouldBeActive = !prefersReducedMotion && isWideEnough();
-    if(shouldBeActive && !parallaxActive){
-      parallaxActive = true;
-      window.addEventListener('scroll', onScroll, { passive:true });
-      updateParallax();
-    } else if(!shouldBeActive && parallaxActive){
-      parallaxActive = false;
-      parallaxTargets.forEach(t=> t.el.style.setProperty(t.prop, '0px'));
-    }
+    const ok = !prefersReducedMotion && isWideEnough();
+    if(ok && !parallaxActive){ parallaxActive=true; window.addEventListener('scroll',onScroll,{passive:true}); updateParallax(); }
+    else if(!ok && parallaxActive){ parallaxActive=false; parallaxTargets.forEach(t=>t.el.style.setProperty(t.prop,'0px')); }
   });
 </script>
+
+<!-- ============ BULLE PROMO ============ -->
+<div class="promo-bubble" id="promoBubble">
+  <div class="promo-popup" id="promoPopup" role="dialog" aria-label="Offre promotionnelle BrickFlix">
+    <div class="promo-popup__header">
+      <span class="promo-popup__tag">🎁 Offre exclusive</span>
+      <button class="promo-popup__close" id="promoClose" aria-label="Fermer">✕</button>
+    </div>
+    <div class="promo-popup__body">
+      <p class="promo-popup__title">1 mois loué,<br><span>1 mois offert</span> 🧱</p>
+      <p class="promo-popup__sub">Utilisez le code ci-dessous lors de votre réservation sur Locabriques pour bénéficier de cette offre.</p>
+      <div class="promo-popup__code">
+        <span class="promo-popup__code-label">BrickFlix2</span>
+        <button class="promo-popup__copy" id="promoCopy">Copier</button>
+      </div>
+    </div>
+  </div>
+  <button class="promo-btn" id="promoBtn" aria-label="Voir l'offre promotionnelle">
+    🎁
+    <span class="promo-btn__ping"></span>
+  </button>
+</div>
 
 </body>
 </html>
